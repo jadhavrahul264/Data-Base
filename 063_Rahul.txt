@@ -1,0 +1,56 @@
+Q1. Write a recursive query to display position of all occurences of a string in a given string.
+ANS: -
+
+delimiter $$
+create function findalloccurrences(mainstring varchar(255), substring varchar(255))
+returns varchar(1024)
+deterministic
+begin
+declare positions varchar(1024);
+declare startpos int default 1;
+declare position int;
+while startpos > 0 do
+set position = locate(substring, mainstring, startpos);
+if position > 0 then
+set positions = concat_ws(',', positions, position);
+set startpos = position + 1;
+else
+set startpos = 0;
+end if;
+end while;
+return positions;
+end $$
+
+delimiter ;
+
+
+Q2. Write a function to return position Nth occurence of a string in a given string.
+ANS: -
+
+delimiter $$
+create function findnthoccurrence(mainstring varchar(255), substring varchar(255), n int)
+returns int
+deterministic
+begin
+declare startpos int default 1;
+declare position int;
+declare countoccurrences int default 0;
+while startpos > 0 do
+set position = locate(substring, mainstring, startpos);
+if position > 0 then
+set countoccurrences = countoccurrences + 1;
+if countoccurrences = n then
+return position;
+end if;
+set startpos = position + 1;
+else
+set startpos = 0;
+end if;
+end while;
+return 0; -- return 0 if the nth occurrence is not found
+end $$
+
+
+delimiter ;
+
+
