@@ -1,0 +1,488 @@
+Enter password: **********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.34 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| db5                |
+| family             |
+| gt                 |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sqldb              |
+| sys                |
+| world              |
++--------------------+
+10 rows in set (0.03 sec)
+
+mysql> use gt;
+Database changed
+mysql> ^C
+mysql> Create the Salespeople table
+    -> CREATE TABLE Salespeople (
+    ->     SNUM INT PRIMARY KEY,
+    ->     SNAME VARCHAR(255),
+    ->     CITY VARCHAR(255),
+    ->     COMM DECIMAL(5,2)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the Salespeople table
+CREATE TABLE Salespeople (
+    SNUM INT PRIMARY KEY,
+    S' at line 1
+mysql>
+mysql>
+mysql> CREATE TABLE Salespeople (
+    ->     SNUM INT PRIMARY KEY,
+    ->     SNAME VARCHAR(255),
+    ->     CITY VARCHAR(255),
+    ->     COMM DECIMAL(5,2)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> INSERT INTO Salespeople (SNUM, SNAME, CITY, COMM) VALUES
+    ->     (1001, 'Peel', 'London', 0.12),
+    ->     (1002, 'Serres', 'San Jose', 0.13),
+    ->     (1004, 'Motika', 'London', 0.11),
+    ->     (1007, 'Rifkin', 'Barcelona', 0.15),
+    ->     (1003, 'AxelRod', 'New York', 0.10),
+    ->     (1005, 'Fran', 'London', 0.26);
+ERROR 1054 (42S22): Unknown column ' 0.26' in 'field list'
+mysql> INSERT INTO Salespeople (SNUM, SNAME, CITY, COMM) VALUES
+    ->     (1001, 'Peel', 'London', 0.12),
+    ->     (1002, 'Serres', 'San Jose', 0.13),
+    ->     (1004, 'Motika', 'London', 0.11),
+    ->     (1007, 'Rifkin', 'Barcelona', 0.15),
+    ->     (1003, 'AxelRod', 'New York', 0.10),
+    ->     (1005, 'Fran', 'London', 0.26);
+ERROR 1054 (42S22): Unknown column ' 0.26' in 'field list'
+mysql> drop Salaespeople;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Salaespeople' at line 1
+mysql> drop table Salespeople;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE TABLE Salespeople (
+    ->     SNUM INT PRIMARY KEY,
+    ->     SNAME VARCHAR(255),
+    ->     CITY VARCHAR(255),
+    ->     COMM DECIMAL(5,2)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> INSERT INTO Salespeople (SNUM, SNAME, CITY, COMM) VALUES
+    ->     (1001, 'Peel', 'London', 0.12),
+    ->     (1002, 'Serres', 'San Jose', 0.13),
+    ->     (1004, 'Motika', 'London', 0.11),
+    ->     (1007, 'Rifkin', 'Barcelona', 0.15),
+    ->     (1003, 'AxelRod', 'New York', 0.10),
+    ->     (1005, 'Fran', 'London', 0.26);
+ERROR 1054 (42S22): Unknown column ' 0.26' in 'field list'
+mysql> INSERT INTO Salespeople (SNUM, SNAME, CITY, COMM) VALUES
+    ->     (1001, 'Peel', 'London', 0.12),
+    ->     (1002, 'Serres', 'San Jose', 0.13),
+    ->     (1004, 'Motika', 'London', 0.11),
+    ->     (1007, 'Rifkin', 'Barcelona', 0.15),
+    ->     (1003, 'AxelRod', 'New York', 0.10),
+    ->     (1005, 'Fran', 'London', 0.26);
+ERROR 1054 (42S22): Unknown column ' 0.26' in 'field list'
+mysql>
+mysql> CREATE TABLE SALESPEOPLE (
+    ->     SNUM INT PRIMARY KEY,
+    ->     SNAME VARCHAR(255),
+    ->     CITY VARCHAR(255),
+    ->     COMM DECIMAL(5, 2)
+    -> );
+ERROR 1050 (42S01): Table 'salespeople' already exists
+mysql>
+mysql> INSERT INTO SALESPEOPLE (SNUM, SNAME, CITY, COMM) VALUES
+    -> (1001, 'Peel', 'London', 0.12),
+    -> (1002, 'Serres', 'San Jose', 0.13),
+    -> (1004, 'Motika', 'London', 0.11),
+    -> (1007, 'Rifkin', 'Barcelona', 0.15),
+    -> (1003, 'AxelRod', 'New York', 0.10),
+    -> (1005, 'Fran', 'London', 0.26);
+Query OK, 6 rows affected (0.01 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE Customers (
+    ->     CNUM INT PRIMARY KEY,
+    ->     CNAME VARCHAR(255),
+    ->     CITY VARCHAR(255),
+    ->     RATING INT,
+    ->     SNUM INT,
+    ->     FOREIGN KEY (SNUM) REFERENCES Salespeople(SNUM)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql>
+mysql> INSERT INTO Customers (CNUM, CNAME, CITY, RATING, SNUM) VALUES
+    ->     (2001, 'Hoffman', 'London', 100, 1001),
+    ->     (2002, 'Giovanni', 'Rome', 200, 1003),
+    ->     (2003, 'Liu', 'San Jose', 200, 1002),
+    ->     (2004, 'Grass', 'Berlin', 300, 1002),
+    ->     (2006, 'Clemens', 'London', 100, 1001),
+    ->     (2008, 'Cisneros', 'San Jose', 300, 1007),
+    ->     (2007, 'Pereira', 'Rome', 100, 1004);
+ERROR 1054 (42S22): Unknown column ' 100' in 'field list'
+mysql> INSERT INTO Customers (CNUM, CNAME, CITY, RATING, SNUM) VALUES
+    ->     (2001, 'Hoffman', 'London', 100, 1001),
+    ->     (2002, 'Giovanni', 'Rome', 200, 1003),
+    ->     (2003, 'Liu', 'San Jose', 200, 1002),
+    ->     (2004, 'Grass', 'Berlin', 300, 1002),
+    ->     (2006, 'Clemens', 'London', 100, 1001),
+    ->     (2008, 'Cisneros', 'San Jose', 300, 1007),
+    ->     (2007, 'Pereira', 'Rome', 100, 1004);
+Query OK, 7 rows affected (0.01 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE Orders (
+    ->     ONUM INT PRIMARY KEY,
+    ->     AMT DECIMAL(10, 2),
+    ->     ODATE DATE,
+    ->     CNUM INT,
+    ->     SNUM INT,
+    ->     FOREIGN KEY (CNUM) REFERENCES Customers(CNUM),
+    ->     FOREIGN KEY (SNUM) REFERENCES Salespeople(SNUM)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> NSERT INTO Orders (ONUM, AMT, ODATE, CNUM, SNUM) VALUES
+    ->     (3001, 18.69, '1996-10-03', 2008, 1007),
+    ->     (3003, 767.19, '1996-10-03', 2001, 1001),
+    ->     (3002, 1900.10, '1996-10-03', 2007, 1004),
+    ->     (3005, 5160.45, '1996-10-03', 2003, 1002),
+    ->     (3006, 1098.16, '1996-10-03', 2008, 1007),
+    ->     (3009, 1713.23, '1996-10-04', 2002, 1003),
+    ->     (3007, 75.75, '1996-10-04', 2002, 1003),
+    ->     (3008, 4723.00, '1996-10-05', 2006, 1001),
+    ->     (3010, 1309.95, '1996-10-06', 2004, 1002),
+    ->     (3011, 9891.88, '1996-10-06', 2006, 1001);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'NSERT INTO Orders (ONUM, AMT, ODATE, CNUM, SNUM) VALUES
+    (3001, 18.69, '1996-' at line 1
+mysql> INSERT INTO Orders (ONUM, AMT, ODATE, CNUM, SNUM) VALUES
+    ->     (3001, 18.69, '1996-10-03', 2008, 1007),
+    ->     (3003, 767.19, '1996-10-03', 2001, 1001),
+    ->     (3002, 1900.10, '1996-10-03', 2007, 1004),
+    ->     (3005, 5160.45, '1996-10-03', 2003, 1002),
+    ->     (3006, 1098.16, '1996-10-03', 2008, 1007),
+    ->     (3009, 1713.23, '1996-10-04', 2002, 1003),
+    ->     (3007, 75.75, '1996-10-04', 2002, 1003),
+    ->     (3008, 4723.00, '1996-10-05', 2006, 1001),
+    ->     (3010, 1309.95, '1996-10-06', 2004, 1002),
+    ->     (3011, 9891.88, '1996-10-06', 2006, 1001);
+Query OK, 10 rows affected (0.01 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+1. List all the columns of the Salespeople table. 
+    select * from Salespeople;
++------+---------+-----------+------+
+| SNUM | SNAME   | CITY      | COMM |
++------+---------+-----------+------+
+| 1001 | Peel    | London    | 0.12 |
+| 1002 | Serres  | San Jose  | 0.13 |
+| 1003 | AxelRod | New York  | 0.10 |
+| 1004 | Motika  | London    | 0.11 |
+| 1005 | Fran    | London    | 0.26 |
+| 1007 | Rifkin  | Barcelona | 0.15 |
++------+---------+-----------+------+
+6 rows in set (0.00 sec)
+
+2. List all customers with a rating of 100. 
+mysql> select * from customers where rating=100;
++------+---------+--------+--------+------+
+| CNUM | CNAME   | CITY   | RATING | SNUM |
++------+---------+--------+--------+------+
+| 2001 | Hoffman | London |    100 | 1001 |
+| 2006 | Clemens | London |    100 | 1001 |
+| 2007 | Pereira | Rome   |    100 | 1004 |
++------+---------+--------+--------+------+
+3 rows in set (0.01 sec)
+
+3. Find all records in the Customer table with NULL values in the city column. 
+	mysql> select * from customers where city  is  null;
+Empty set (0.01 sec)
+
+4. Find the largest order taken by each salesperson on each date. 
+mysql> select o.snum,odate,sname,max(amt) as largest
+    -> from orders o join salespeople p
+    -> On o.snum = p.snum
+    -> group by o.snum,odate;
++------+------------+---------+---------+
+| snum | odate      | sname   | largest |
++------+------------+---------+---------+
+| 1001 | 1996-10-03 | Peel    |  767.19 |
+| 1001 | 1996-10-05 | Peel    | 4723.00 |
+| 1001 | 1996-10-06 | Peel    | 9891.88 |
+| 1002 | 1996-10-03 | Serres  | 5160.45 |
+| 1002 | 1996-10-06 | Serres  | 1309.95 |
+| 1003 | 1996-10-04 | AxelRod | 1713.23 |
+| 1004 | 1996-10-03 | Motika  | 1900.10 |
+| 1007 | 1996-10-03 | Rifkin  | 1098.16 |
++------+------------+---------+---------+
+8 rows in set (0.00 sec)select 
+
+5. Arrange the Orders table by descending customer number. 
+
+mysql> select * from orders order by cnum desc;
++------+---------+------------+------+------+
+| ONUM | AMT     | ODATE      | CNUM | SNUM |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1996-10-03 | 2008 | 1007 |
+| 3006 | 1098.16 | 1996-10-03 | 2008 | 1007 |
+| 3002 | 1900.10 | 1996-10-03 | 2007 | 1004 |
+| 3008 | 4723.00 | 1996-10-05 | 2006 | 1001 |
+| 3011 | 9891.88 | 1996-10-06 | 2006 | 1001 |
+| 3010 | 1309.95 | 1996-10-06 | 2004 | 1002 |
+| 3005 | 5160.45 | 1996-10-03 | 2003 | 1002 |
+| 3007 |   75.75 | 1996-10-04 | 2002 | 1003 |
+| 3009 | 1713.23 | 1996-10-04 | 2002 | 1003 |
+| 3003 |  767.19 | 1996-10-03 | 2001 | 1001 |
++------+---------+------------+------+------+
+10 rows in set (0.00 sec)
+
+
+5. Arrange the Orders table by descending customer number. 
+
+
+ select * from orders order by cnum desc;
++------+---------+------------+------+------+
+| ONUM | AMT     | ODATE      | CNUM | SNUM |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1996-10-03 | 2008 | 1007 |
+| 3006 | 1098.16 | 1996-10-03 | 2008 | 1007 |
+| 3002 | 1900.10 | 1996-10-03 | 2007 | 1004 |
+| 3008 | 4723.00 | 1996-10-05 | 2006 | 1001 |
+| 3011 | 9891.88 | 1996-10-06 | 2006 | 1001 |
+| 3010 | 1309.95 | 1996-10-06 | 2004 | 1002 |
+| 3005 | 5160.45 | 1996-10-03 | 2003 | 1002 |
+| 3007 |   75.75 | 1996-10-04 | 2002 | 1003 |
+| 3009 | 1713.23 | 1996-10-04 | 2002 | 1003 |
+| 3003 |  767.19 | 1996-10-03 | 2001 | 1001 |
++------+---------+------------+------+------+
+10 rows in set (0.00 sec)
+
+12. Find the largest order taken by each salesperson. 
+
+mysql> select * from orders order by cnum desc;
++------+---------+------------+------+------+
+| ONUM | AMT     | ODATE      | CNUM | SNUM |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1996-10-03 | 2008 | 1007 |
+| 3006 | 1098.16 | 1996-10-03 | 2008 | 1007 |
+| 3002 | 1900.10 | 1996-10-03 | 2007 | 1004 |
+| 3008 | 4723.00 | 1996-10-05 | 2006 | 1001 |
+| 3011 | 9891.88 | 1996-10-06 | 2006 | 1001 |
+| 3010 | 1309.95 | 1996-10-06 | 2004 | 1002 |
+| 3005 | 5160.45 | 1996-10-03 | 2003 | 1002 |
+| 3007 |   75.75 | 1996-10-04 | 2002 | 1003 |
+| 3009 | 1713.23 | 1996-10-04 | 2002 | 1003 |
+| 3003 |  767.19 | 1996-10-03 | 2001 | 1001 |
++------+---------+------------+------+------+
+10 rows in set (0.00 sec)
+
+13. Find customers in San Jose who have a rating above 200. 
+mysql> select * from customers where rating>200;
++------+----------+----------+--------+------+
+| CNUM | CNAME    | CITY     | RATING | SNUM |
++------+----------+----------+--------+------+
+| 2004 | Grass    | Berlin   |    300 | 1002 |
+| 2008 | Cisneros | San Jose |    300 | 1007 |
++------+----------+----------+--------+------+
+2 rows in set (0.00 sec)
+
+
+ 14.List the names and commissions of all salespeople in London. 
+	
+mysql> select sname,comm
+    -> from salespeople
+    -> where
+    -> city = 'London';
++--------+------+
+| sname  | comm |
++--------+------+
+| Peel   | 0.12 |
+| Motika | 0.11 |
+| Fran   | 0.26 |
++--------+------+
+3 rows in set (0.00 sec)
+
+15. List all the orders of salesperson Motika from the Orders table. 
+mysql> select * from orders where snum=(select snum from salespeople where sname='motika');
++------+---------+------------+------+------+
+| ONUM | AMT     | ODATE      | CNUM | SNUM |
++------+---------+------------+------+------+
+| 3002 | 1900.10 | 1996-10-03 | 2007 | 1004 |
++------+---------+------------+------+------+
+1 row in set (0.01 sec)
+
+22. Give the salespeople’s commissions as percentages instead of decimal numbers.
+
+mysql> select snum, sname, city, concat((comm *100), '%')
+    -> as comm_percentage from salespeople;
++------+---------+-----------+-----------------+
+| snum | sname   | city      | comm_percentage |
++------+---------+-----------+-----------------+
+| 1001 | Peel    | London    | 12.00%          |
+| 1002 | Serres  | San Jose  | 13.00%          |
+| 1003 | AxelRod | New York  | 10.00%          |
+| 1004 | Motika  | London    | 11.00%          |
+| 1005 | Fran    | London    | 26.00%          |
+| 1007 | Rifkin  | Barcelona | 15.00%          |
++------+---------+-----------+-----------------+
+6 rows in set (0.00 sec)
+
+26. Select all customers with a rating above 200.00.
+
+mysql> select * from customers where rating>200;
++------+----------+----------+--------+------+
+| CNUM | CNAME    | CITY     | RATING | SNUM |
++------+----------+----------+--------+------+
+| 2004 | Grass    | Berlin   |    300 | 1002 |
+| 2008 | Cisneros | San Jose |    300 | 1007 |
++------+----------+----------+--------+------+
+2 rows in set (0.00 sec)
+
+
+
+27. Count the number of salespeople currently listing orders in the Orders table.
+
+mysql> select count(distinct snum)  from orders;
++----------------------+
+| count(distinct snum) |
++----------------------+
+|                    5 |
++----------------------+
+1 row in set (0.00 sec)
+
+31. Find all salespeople whose name starts with ‘P’ and the fourth character is ‘l’.
+mysql> select * from salespeople where sname  like '%P__l%';
++------+-------+--------+------+
+| SNUM | SNAME | CITY   | COMM |
++------+-------+--------+------+
+| 1001 | Peel  | London | 0.12 |
++------+-------+--------+------+
+1 row in set (0.00 sec)
+
+32. Write a query that uses a subquery to obtain all orders for the customer named Cisneros.
+Assume you do not know his customer number.
+
+mysql> select * from orders where cnum = (select cnum from customers where  cname = 'cisneros');
++------+---------+------------+------+------+
+| ONUM | AMT     | ODATE      | CNUM | SNUM |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1996-10-03 | 2008 | 1007 |
+| 3006 | 1098.16 | 1996-10-03 | 2008 | 1007 |
++------+---------+------------+------+------+
+2 rows in set (0.00 sec)
+
+34. Extract the Salespeople table in the following order : SNUM, SNAME, COMMISSION, CITY.
+mysql> select snum,sname,comm ,city from salespeople;
++------+---------+------+-----------+
+| snum | sname   | comm | city      |
++------+---------+------+-----------+
+| 1001 | Peel    | 0.12 | London    |
+| 1002 | Serres  | 0.13 | San Jose  |
+| 1003 | AxelRod | 0.10 | New York  |
+| 1004 | Motika  | 0.11 | London    |
+| 1005 | Fran    | 0.26 | London    |
+| 1007 | Rifkin  | 0.15 | Barcelona |
++------+---------+------+-----------+
+6 rows in set (0.00 sec)
+
+35. Select all customers whose names fall in between ‘A’ and ‘G’ alphabetical range.
+
+mysql> select * from customers where cname>='A' and  cname<='G';
++------+----------+----------+--------+------+
+| CNUM | CNAME    | CITY     | RATING | SNUM |
++------+----------+----------+--------+------+
+| 2006 | Clemens  | London   |    100 | 1001 |
+| 2008 | Cisneros | San Jose |    300 | 1007 |
++------+----------+----------+--------+------+
+2 rows in set (0.00 sec)
+
+40. Write a select command that produces the rating followed by the name of each customer in
+San Jose.
+
+mysql> select  rating,cname from customers where city = 'san jose';
++--------+----------+
+| rating | cname    |
++--------+----------+
+|    200 | Liu      |
+|    300 | Cisneros |
++--------+----------+
+2 rows in set (0.00 sec)
+
+46. Write a query that produces all pairs of salespeople with themselves as well as duplicate rows
+with the order reversed.
+
+mysql> select * from salespeople p join salespeople w;
++------+---------+-----------+------+------+---------+-----------+------+
+| SNUM | SNAME   | CITY      | COMM | SNUM | SNAME   | CITY      | COMM |
++------+---------+-----------+------+------+---------+-----------+------+
+| 1007 | Rifkin  | Barcelona | 0.15 | 1001 | Peel    | London    | 0.12 |
+| 1005 | Fran    | London    | 0.26 | 1001 | Peel    | London    | 0.12 |
+| 1004 | Motika  | London    | 0.11 | 1001 | Peel    | London    | 0.12 |
+| 1003 | AxelRod | New York  | 0.10 | 1001 | Peel    | London    | 0.12 |
+| 1002 | Serres  | San Jose  | 0.13 | 1001 | Peel    | London    | 0.12 |
+| 1001 | Peel    | London    | 0.12 | 1001 | Peel    | London    | 0.12 |
+| 1007 | Rifkin  | Barcelona | 0.15 | 1002 | Serres  | San Jose  | 0.13 |
+| 1005 | Fran    | London    | 0.26 | 1002 | Serres  | San Jose  | 0.13 |
+| 1004 | Motika  | London    | 0.11 | 1002 | Serres  | San Jose  | 0.13 |
+| 1003 | AxelRod | New York  | 0.10 | 1002 | Serres  | San Jose  | 0.13 |
+| 1002 | Serres  | San Jose  | 0.13 | 1002 | Serres  | San Jose  | 0.13 |
+| 1001 | Peel    | London    | 0.12 | 1002 | Serres  | San Jose  | 0.13 |
+| 1007 | Rifkin  | Barcelona | 0.15 | 1003 | AxelRod | New York  | 0.10 |
+| 1005 | Fran    | London    | 0.26 | 1003 | AxelRod | New York  | 0.10 |
+| 1004 | Motika  | London    | 0.11 | 1003 | AxelRod | New York  | 0.10 |
+| 1003 | AxelRod | New York  | 0.10 | 1003 | AxelRod | New York  | 0.10 |
+| 1002 | Serres  | San Jose  | 0.13 | 1003 | AxelRod | New York  | 0.10 |
+| 1001 | Peel    | London    | 0.12 | 1003 | AxelRod | New York  | 0.10 |
+| 1007 | Rifkin  | Barcelona | 0.15 | 1004 | Motika  | London    | 0.11 |
+| 1005 | Fran    | London    | 0.26 | 1004 | Motika  | London    | 0.11 |
+| 1004 | Motika  | London    | 0.11 | 1004 | Motika  | London    | 0.11 |
+| 1003 | AxelRod | New York  | 0.10 | 1004 | Motika  | London    | 0.11 |
+| 1002 | Serres  | San Jose  | 0.13 | 1004 | Motika  | London    | 0.11 |
+| 1001 | Peel    | London    | 0.12 | 1004 | Motika  | London    | 0.11 |
+| 1007 | Rifkin  | Barcelona | 0.15 | 1005 | Fran    | London    | 0.26 |
+| 1005 | Fran    | London    | 0.26 | 1005 | Fran    | London    | 0.26 |
+| 1004 | Motika  | London    | 0.11 | 1005 | Fran    | London    | 0.26 |
+| 1003 | AxelRod | New York  | 0.10 | 1005 | Fran    | London    | 0.26 |
+| 1002 | Serres  | San Jose  | 0.13 | 1005 | Fran    | London    | 0.26 |
+| 1001 | Peel    | London    | 0.12 | 1005 | Fran    | London    | 0.26 |
+| 1007 | Rifkin  | Barcelona | 0.15 | 1007 | Rifkin  | Barcelona | 0.15 |
+| 1005 | Fran    | London    | 0.26 | 1007 | Rifkin  | Barcelona | 0.15 |
+| 1004 | Motika  | London    | 0.11 | 1007 | Rifkin  | Barcelona | 0.15 |
+| 1003 | AxelRod | New York  | 0.10 | 1007 | Rifkin  | Barcelona | 0.15 |
+| 1002 | Serres  | San Jose  | 0.13 | 1007 | Rifkin  | Barcelona | 0.15 |
+| 1001 | Peel    | London    | 0.12 | 1007 | Rifkin  | Barcelona | 0.15 |
++------+---------+-----------+------+------+---------+-----------+------+
+36 rows in set (0.00 sec)
+
+47. Find all salespeople that are located in either Barcelona or London.
+ mysql> select * from salespeople where  city in ('barcelona','london');
++------+--------+-----------+------+
+| SNUM | SNAME  | CITY      | COMM |
++------+--------+-----------+------+
+| 1001 | Peel   | London    | 0.12 |
+| 1004 | Motika | London    | 0.11 |
+| 1005 | Fran   | London    | 0.26 |
+| 1007 | Rifkin | Barcelona | 0.15 |
++------+--------+-----------+------+
+4 rows in set (0.00 sec)
+
+48.Find all salespeople with only one customer.
+
+
+
