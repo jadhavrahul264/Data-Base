@@ -1,0 +1,11 @@
+//SqlQuery Update
+
+
+CREATE PROCEDURE updateData14
+	@cName NVARCHAR(Max),
+	@cid int
+
+AS
+	BEGIN
+	UPDATE Customer_Details1 set Name=@cName where Id=@cid
+	END
