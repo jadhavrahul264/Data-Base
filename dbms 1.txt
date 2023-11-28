@@ -1,0 +1,28 @@
+1) select * from employee  where salary>=30000;
+
+2) select sum(sal),max(sal),min(sal),avg(sal) from employee e join department d on e.deptid = d.deptid group by department name;
+
+3) select * from emp order by salary desc 1,2;
+
+4)>>i) select *  from (select salary ,dense rank() over(order by 
+salary dense) rnk from emp) as t where rn =3;
+
+  >>ii)select ename, salary from emp e,where 3=
+	(select count(distinct sal) from emp e2 
+	where  e2.sal>e1.sal)
+
+5) select empno, ename, timestampdiff(year,hiredate,curdate())  fom emp;
+
+6) select * from emp where to_char (hiredate,'month')like'_a%';
+
+7) select e* from emp  e join dept d on e.deptid = d.deptid;
+
+8) select max(sal) name from employee group by  managerid name;
+
+9) select distint dept name from department; //
+// select distinct  deptno,dname,location from dept;
+
+10) select * from emp where  sal in( select min(sal) from emp e join dept d 
+	on e.deptid=d.deptid group by deptname); 
+
+11) 
