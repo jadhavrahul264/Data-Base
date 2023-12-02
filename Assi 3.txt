@@ -1,0 +1,203 @@
+
+
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+/**
+ * Servlet implementation class Add_student
+ */
+public class Add_student extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+			private Connection con;
+	/**
+	 * @see Servlet#init(ServletConfig)
+	 */
+	public void init(ServletConfig config) throws ServletException {
+		try
+		{
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			String ss="jdbc:mysql://localhost:3306/bit";
+			con = DriverManager.getConnection(ss,"root","Rahul@3566");
+			
+			
+
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try
+		{
+			response.setContentType("text/html");
+			PrintWriter pw = response.getWriter();
+			String name= request.getParameter("name");
+			int age = Integer.parseInt(request.getParameter("age").trim());
+			String address = request.getParameter("address");
+			PreparedStatement pst = con.prepareStatement("Insert into student (name,age,address) values(?,?,?)");
+			pst.setString(1,name);
+			pst.setInt(2, age);
+			pst.setString(3,address);
+				int k = pst.executeUpdate();
+				if(k>0)
+				{
+					pw.println("REcord are updated");
+					
+				}
+				else
+				{
+					pw.println("Record not updated");
+					
+				}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+	}
+
+}
+--------------------------------------------------------------
+
+
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+/**
+ * Servlet implementation class view_student
+ */
+public class view_student extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private Connection con;
+	/**
+	 * @see Servlet#init(ServletConfig)
+	 */
+	public void init(ServletConfig config) throws ServletException {
+		try
+		{
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			String ss="jdbc:mysql://localhost:3306/bit";
+			con = DriverManager.getConnection(ss,"root","Rahul@3566");
+			
+			
+
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try
+		{
+			response.setContentType("text/html");
+			PrintWriter pw = response.getWriter();
+			
+			PreparedStatement pst = con.prepareStatement("select * from student ");
+			pst.executeQuery();
+			 ResultSet rs = pst.executeQuery();
+
+		        
+		        while (rs.next()) {
+		           
+		            String name = rs.getString("name");
+		            int age = rs.getInt("age");
+		            String add = rs.getString("address");
+
+		            
+		            pw.println("name: "+name+"     "+"    age:"+age+"      address: "+add +"<br>");
+		        }
+		        
+		        
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+}
+--------------------------------------------------------------
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<a href = "Info.html">add student</a> <br>
+<a href = "view_student"> view student</a>
+</body>
+</html>
+
+--------------------------------------------------------------
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form  action="Add_student" method=post>
+		Enter Name:<input type = text name="name"/>
+		<br>
+		Enter age:<input type = text name = "age"/>
+		<br>
+		Enter address:<input type = text name = "address"/>
+		<input type = submit>
+		
+	</form>
+
+</body>
+</html>
+--------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
