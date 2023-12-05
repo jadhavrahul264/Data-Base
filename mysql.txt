@@ -1,0 +1,855 @@
+Microsoft Windows [Version 10.0.19042.870]
+(c) 2020 Microsoft Corporation. All rights reserved.
+
+C:\Users\Computer>mysql -uroot -pShu@1234 -P3306
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 29
+Server version: 8.0.34 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sep_2023           |
+| sys                |
+| world              |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use sep_2023;
+Database changed
+mysql> show tables;
++--------------------+
+| Tables_in_sep_2023 |
++--------------------+
+| t1                 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> desc t1;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| c1    | int          | YES  |     | NULL    |       |
+| c2    | varchar(100) | YES  |     | NULL    |       |
+| c3    | date         | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select *from table;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table' at line 1
+mysql> select *from t1;
++------+------+------------+
+| c1   | c2   | c3         |
++------+------+------------+
+|    1 | a    | 2023-09-22 |
+|    1 | b    | 2023-08-22 |
++------+------+------------+
+2 rows in set (0.00 sec)
+
+mysql> insert into t1(c1,c2,c3) values
+    -> (1,'b','2023-08-22');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into t1(c1,c2,c3) values
+    -> (1,'b','2023-08-22');
+Query OK, 1 row affected (0.11 sec)
+
+mysql>  insert into t1(c1,c2,c3) values
+    -> (1,'b','2023-08-22'),
+    -> (2,'c',2023-02-11');
+    '> (2,'c',2023-02-11');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '');
+(2,'c',2023-02-11')' at line 3
+mysql> desc t1;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| c1    | int          | YES  |     | NULL    |       |
+| c2    | varchar(100) | YES  |     | NULL    |       |
+| c3    | date         | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select *from table;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table' at line 1
+mysql> select *from t1;
++------+------+------------+
+| c1   | c2   | c3         |
++------+------+------------+
+|    1 | a    | 2023-09-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
++------+------+------------+
+4 rows in set (0.00 sec)
+
+mysql> insert into t1(c1,c2) values (4,'d');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> select *from t1;
++------+------+------------+
+| c1   | c2   | c3         |
++------+------+------------+
+|    1 | a    | 2023-09-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
+|    4 | d    | NULL       |
++------+------+------------+
+5 rows in set Microsoft Windows [Version 10.0.19042.870]
+(c) 2020 Microsoft Corporation. All rights reserved.
+
+C:\Users\Computer>mysql -uroot -pShu@1234 -p3306
+mysql: [Warning] Using a password on the command line interface can be insecure.
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+
+C:\Users\Computer>mysql -uroot -pShu@1234
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 31
+Server version: 8.0.34 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sep_2023           |
+| sys                |
+| world              |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use sep_2023;
+Database changed
+mysql> select database();
++------------+
+| database() |
++------------+
+| sep_2023   |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select tables();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '()' at line 1
+mysql> select tables;
+ERROR 1054 (42S22): Unknown column 'tables' in 'field list'
+mysql> show tables;
++--------------------+
+| Tables_in_sep_2023 |
++--------------------+
+| t1                 |
++--------------------+
+1 row in set (0.01 sec)
+
+mysql> desc t1;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| c1    | int          | YES  |     | NULL    |       |
+| c2    | varchar(100) | YES  |     | NULL    |       |
+| c3    | date         | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select *from t1;
++------+------+------------+
+| c1   | c2   | c3         |
++------+------+------------+
+|    1 | a    | 2023-09-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
+|    4 | d    | NULL       |
++------+------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select c1,c2 from t1;
++------+------+
+| c1   | c2   |
++------+------+
+|    1 | a    |
+|    1 | b    |
+|    1 | b    |
+|    1 | b    |
+|    4 | d    |
++------+------+
+5 rows in set (0.00 sec)
+
+mysql> show database();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'database()' at line 1
+mysql> select database();
++------------+
+| database() |
++------------+
+| sep_2023   |
++------------+
+1 row in set (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sep_2023           |
+| sys                |
+| world              |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use sakila;
+Database changed
+mysql> select database();
++------------+
+| database() |
++------------+
+| sakila     |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select tables;
+ERROR 1054 (42S22): Unknown column 'tables' in 'field list'
+mysql> show tables();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '()' at line 1
+mysql> show table();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '()' at line 1
+mysql> show table;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> cls
+    -> ';
+    '> '|
+    -> '/
+    '> ';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'cls
+';
+'|
+'/
+'' at line 1
+mysql> show tables;
++----------------------------+
+| Tables_in_sakila           |
++----------------------------+
+| actor                      |
+| actor_info                 |
+| address                    |
+| category                   |
+| city                       |
+| country                    |
+| customer                   |
+| customer_list              |
+| film                       |
+| film_actor                 |
+| film_category              |
+| film_list                  |
+| film_text                  |
+| inventory                  |
+| language                   |
+| nicer_but_slower_film_list |
+| payment                    |
+| rental                     |
+| sales_by_film_category     |
+| sales_by_store             |
+| staff                      |
+| staff_list                 |
+| store                      |
++----------------------------+
+23 rows in set (0.00 sec)
+
+mysql> use sep_2023;
+Database changed
+mysql> desc t1;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| c1    | int          | YES  |     | NULL    |       |
+| c2    | varchar(100) | YES  |     | NULL    |       |
+| c3    | date         | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from t1;
++------+------+------------+
+| c1   | c2   | c3         |
++------+------+------------+
+|    1 | a    | 2023-09-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
+|    4 | d    | NULL       |
++------+------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select *from t1 where c2='d';
++------+------+------+
+| c1   | c2   | c3   |
++------+------+------+
+|    4 | d    | NULL |
++------+------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from t1 where c1=1;
++------+------+------------+
+| c1   | c2   | c3         |
++------+------+------------+
+|    1 | a    | 2023-09-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
++------+------+------------+
+4 rows in set (0.00 sec)
+
+mysql> --comments in program
+    -> ';
+    '> ';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--comments in program
+';
+'' at line 1
+mysql> select * from t1 where c1=2;
+Empty set (0.00 sec)
+
+mysql> select *from t1 where c1=1 and c2=a;
+ERROR 1054 (42S22): Unknown column 'a' in 'where clause'
+mysql> select * from t1 where c1=1 and c2='a';
++------+------+------------+
+| c1   | c2   | c3         |
++------+------+------------+
+|    1 | a    | 2023-09-22 |
++------+------+------------+
+1 row in set (0.00 sec)
+
+mysql> select *from t1 where c1=1 or c2='d';
++------+------+------------+
+| c1   | c2   | c3         |
++------+------+------------+
+|    1 | a    | 2023-09-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
+|    4 | d    | NULL       |
++------+------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from t1 where c1>1;
++------+------+------+
+| c1   | c2   | c3   |
++------+------+------+
+|    4 | d    | NULL |
++------+------+------+
+1 row in set (0.00 sec)
+
+mysql> select *from t1 where c1<=1;
++------+------+------------+
+| c1   | c2   | c3         |
++------+------+------------+
+|    1 | a    | 2023-09-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
++------+------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from t1 where c2='b';
++------+------+------------+
+| c1   | c2   | c3         |
++------+------+------------+
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
++------+------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from t1 where c1 not in (1);
++------+------+------+
+| c1   | c2   | c3   |
++------+------+------+
+|    4 | d    | NULL |
++------+------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from t1 between c2='a' to c2='b';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'between c2='a' to c2='b'' at line 1
+mysql> select * from t1 between c2='a'and c2='b';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'between c2='a'and c2='b'' at line 1
+mysql> select *from t1 where c2='a' and c2='b';
+Empty set (0.00 sec)
+
+mysql> select *from t1 where c2 between 'a' and 'b';
++------+------+------------+
+| c1   | c2   | c3         |
++------+------+------------+
+|    1 | a    | 2023-09-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
++------+------+------------+
+4 rows in set (0.00 sec)
+
+mysql> t1 order by c2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 't1 order by c2' at line 1
+mysql> select * from t1 order by c2;
++------+------+------------+
+| c1   | c2   | c3         |
++------+------+------------+
+|    1 | a    | 2023-09-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
+|    4 | d    | NULL       |
++------+------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from t1 where c3 is null;
++------+------+------+
+| c1   | c2   | c3   |
++------+------+------+
+|    4 | d    | NULL |
++------+------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from t1 where c3 is not null;
++------+------+------------+
+| c1   | c2   | c3         |
++------+------+------------+
+|    1 | a    | 2023-09-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
++------+------+------------+
+4 rows in set (0.00 sec)
+
+mysql> --where c2 start with a
+    -> ';
+    '> ;'
+    -> ';
+    '> ';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--where c2 start with a
+';
+;'
+';
+'' at line 1
+mysql> select * from t1 where c2 like 'a%';
++------+------+------------+
+| c1   | c2   | c3         |
++------+------+------------+
+|    1 | a    | 2023-09-22 |
++------+------+------------+
+1 row in set (0.00 sec)
+
+mysql> select *from t1 where c2 like '%a';
++------+------+------------+
+| c1   | c2   | c3         |
++------+------+------------+
+|    1 | a    | 2023-09-22 |
++------+------+------------+
+1 row in set (0.00 sec)
+
+mysql> select *from t1 where c2 like '%a%';
++------+------+------------+
+| c1   | c2   | c3         |
++------+------+------------+
+|    1 | a    | 2023-09-22 |
++------+------+------------+
+1 row in set (0.00 sec)
+
+mysql> select * from t1 where  c2 like 'a_0';
+Empty set (0.00 sec)
+
+crosoft Windows [Version 10.0.19042.870]
+(c) 2020 Microsoft Corporation. All rights reserved.
+
+C:\Users\Computer>mysql -uroot -pShu@1234 -p3306
+mysql: [Warning] Using a password on the command line interface can be insecure.
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+
+C:\Users\Computer>mysql -uroot -pShu@1234
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 31
+Server version: 8.0.34 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sep_2023           |
+| sys                |
+| world              |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use sep_2023;
+Database changed
+mysql> select database();
++------------+
+| database() |
++------------+
+| sep_2023   |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select tables();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '()' at line 1
+mysql> select tables;
+ERROR 1054 (42S22): Unknown column 'tables' in 'field list'
+mysql> show tables;
++--------------------+
+| Tables_in_sep_2023 |
++--------------------+
+| t1                 |
++--------------------+
+1 row in set (0.01 sec)
+
+mysql> desc t1;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| c1    | int          | YES  |     | NULL    |       |
+| c2    | varchar(100) | YES  |     | NULL    |       |
+| c3    | date         | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select *from t1;
++------+------+------------+
+| c1   | c2   | c3         |
++------+------+------------+
+|    1 | a    | 2023-09-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
+|    4 | d    | NULL       |
++------+------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select c1,c2 from t1;
++------+------+
+| c1   | c2   |
++------+------+
+|    1 | a    |
+|    1 | b    |
+|    1 | b    |
+|    1 | b    |
+|    4 | d    |
++------+------+
+5 rows in set (0.00 sec)
+
+mysql> show database();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'database()' at line 1
+mysql> select database();
++------------+
+| database() |
++------------+
+| sep_2023   |
++------------+
+1 row in set (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sep_2023           |
+| sys                |
+| world              |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use sakila;
+Database changed
+mysql> select database();
++------------+
+| database() |
++------------+
+| sakila     |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select tables;
+ERROR 1054 (42S22): Unknown column 'tables' in 'field list'
+mysql> show tables();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '()' at line 1
+mysql> show table();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '()' at line 1
+mysql> show table;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> cls
+    -> ';
+    '> '|
+    -> '/
+    '> ';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'cls
+';
+'|
+'/
+'' at line 1
+mysql> show tables;
++----------------------------+
+| Tables_in_sakila           |
++----------------------------+
+| actor                      |
+| actor_info                 |
+| address                    |
+| category                   |
+| city                       |
+| country                    |
+| customer                   |
+| customer_list              |
+| film                       |
+| film_actor                 |
+| film_category              |
+| film_list                  |
+| film_text                  |
+| inventory                  |
+| language                   |
+| nicer_but_slower_film_list |
+| payment                    |
+| rental                     |
+| sales_by_film_category     |
+| sales_by_store             |
+| staff                      |
+| staff_list                 |
+| store                      |
++----------------------------+
+23 rows in set (0.00 sec)
+
+mysql> use sep_2023;
+Database changed
+mysql> desc t1;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| c1    | int          | YES  |     | NULL    |       |
+| c2    | varchar(100) | YES  |     | NULL    |       |
+| c3    | date         | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from t1;
++------+------+------------+
+| c1   | c2   | c3         |
++------+------+------------+
+|    1 | a    | 2023-09-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
+|    4 | d    | NULL       |
++------+------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select *from t1 where c2='d';
++------+------+------+
+| c1   | c2   | c3   |
++------+------+------+
+|    4 | d    | NULL |
++------+------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from t1 where c1=1;
++------+------+------------+
+| c1   | c2   | c3         |
++------+------+------------+
+|    1 | a    | 2023-09-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
++------+------+------------+
+4 rows in set (0.00 sec)
+
+mysql> --comments in program
+    -> ';
+    '> ';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--comments in program
+';
+'' at line 1
+mysql> select * from t1 where c1=2;
+Empty set (0.00 sec)
+
+mysql> select *from t1 where c1=1 and c2=a;
+ERROR 1054 (42S22): Unknown column 'a' in 'where clause'
+mysql> select * from t1 where c1=1 and c2='a';
++------+------+------------+
+| c1   | c2   | c3         |
++------+------+------------+
+|    1 | a    | 2023-09-22 |
++------+------+------------+
+1 row in set (0.00 sec)
+
+mysql> select *from t1 where c1=1 or c2='d';
++------+------+------------+
+| c1   | c2   | c3         |
++------+------+------------+
+|    1 | a    | 2023-09-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
+|    4 | d    | NULL       |
++------+------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from t1 where c1>1;
++------+------+------+
+| c1   | c2   | c3   |
++------+------+------+
+|    4 | d    | NULL |
++------+------+------+
+1 row in set (0.00 sec)
+
+mysql> select *from t1 where c1<=1;
++------+------+------------+
+| c1   | c2   | c3         |
++------+------+------------+
+|    1 | a    | 2023-09-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
++------+------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from t1 where c2='b';
++------+------+------------+
+| c1   | c2   | c3         |
++------+------+------------+
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
++------+------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from t1 where c1 not in (1);
++------+------+------+
+| c1   | c2   | c3   |
++------+------+------+
+|    4 | d    | NULL |
++------+------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from t1 between c2='a' to c2='b';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'between c2='a' to c2='b'' at line 1
+mysql> select * from t1 between c2='a'and c2='b';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'between c2='a'and c2='b'' at line 1
+mysql> select *from t1 where c2='a' and c2='b';
+Empty set (0.00 sec)
+
+mysql> select *from t1 where c2 between 'a' and 'b';
++------+------+------------+
+| c1   | c2   | c3         |
++------+------+------------+
+|    1 | a    | 2023-09-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
++------+------+------------+
+4 rows in set (0.00 sec)
+
+mysql> t1 order by c2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 't1 order by c2' at line 1
+mysql> select * from t1 order by c2;
++------+------+------------+
+| c1   | c2   | c3         |
++------+------+------------+
+|    1 | a    | 2023-09-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
+|    4 | d    | NULL       |
++------+------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from t1 where c3 is null;
++------+------+------+
+| c1   | c2   | c3   |
++------+------+------+
+|    4 | d    | NULL |
++------+------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from t1 where c3 is not null;
++------+------+------------+
+| c1   | c2   | c3         |
++------+------+------------+
+|    1 | a    | 2023-09-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
+|    1 | b    | 2023-08-22 |
++------+------+------------+
+4 rows in set (0.00 sec)
+
+mysql> --where c2 start with a
+    -> ';
+    '> ;'
+    -> ';
+    '> ';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--where c2 start with a
+';
+;'
+';
+'' at line 1
+mysql> select * from t1 where c2 like 'a%';
++------+------+------------+
+| c1   | c2   | c3         |
++------+------+------------+
+|    1 | a    | 2023-09-22 |
++------+------+------------+
+1 row in set (0.00 sec)
+
+mysql> select *from t1 where c2 like '%a';
++------+------+------------+
+| c1   | c2   | c3         |
++------+------+------------+
+|    1 | a    | 2023-09-22 |
++------+------+------------+
+1 row in set (0.00 sec)
+
+mysql> select *from t1 where c2 like '%a%';
++------+------+------------+
+| c1   | c2   | c3         |
++------+------+------------+
+|    1 | a    | 2023-09-22 |
++------+------+------------+
+1 row in set (0.00 sec)
+
+mysql> select * from t1 where  c2 like 'a_0';
+Empty set (0.00 sec)
